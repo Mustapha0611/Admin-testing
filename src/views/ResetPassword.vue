@@ -1,99 +1,73 @@
-<script setup>
-import { ref } from "vue";
-
-import Button from "primevue/button";
-
-const value1 = ref("");
-const value2 = ref("");
-</script>
-
 <template>
-  <main>
-    <div class="flex items-center justify-center h-[100dvh] px-20 gap-20">
-      <section>
-        <div class="w-[400px] h-[200px]">
-          <img
-            src="@/assets/logo-image.png"
-            alt="brand logo"
-            class="w-full h-full"
-          />
-        </div>
-      </section>
-      <section class="w-[500px] h-auto border-2 rounded-2xl py-8 px-4">
-        <h1 class="font-bold text-2xl">{{ $t('reset.heading') }}</h1>
-        <p class="py-2 mb-6">
-          {{ $t('reset.subheading') }}
-        </p>
-        <form>
-          <div class="relative mb-2">
-            <label
-              for="password"
-              class="block text-xs font-bold"
-              >{{ $t('reset.newPass') }}</label
-            >
-            <div class="my-1">
-              <input
-                :type="showPassword ? 'text' : 'password'"
-                id="password"
-                v-model="password"
-                class="block w-full px-3 py-3 rounded-2xl bg-slate-200 border  shadow-sm focus:outline-none hover:ring-gray-500 focus:border-2 focus:border-gray-400 sm:text-sm"
-                placeholder="Enter your password"
-              />
-              <button
-                type="button"
-                @click="togglePassword"
-                :class="
-                  $i18n.locale === 'en'
-                    ? 'absolute top-1/2 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 focus:outline-none'
-                    : 'absolute top-1/2 left-0 flex items-center pl-3 text-gray-500 hover:text-gray-700 focus:outline-none'
-                "
-              >
-                <i
-                  :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
-                  class="text-base transition-all duration-500"
-                ></i>
-              </button>
-            </div>
-          </div>
-          <div class="relative mb-2">
-            <label
-              for="password"
-              class="block text-xs font-bold"
-              >{{ $t('reset.confirmPass') }}</label
-            >
-            <div class="my-1">
-              <input
-                :type="showPassword ? 'text' : 'password'"
-                id="password"
-                v-model="password"
-                class="block w-full px-3 py-3 rounded-2xl bg-slate-200 border  shadow-sm focus:outline-none hover:ring-gray-500 focus:border-2 focus:border-gray-400 sm:text-sm"
-                placeholder="Enter your password"
-              />
-              <button
-                type="button"
-                @click="togglePassword"
-                :class="
-                  $i18n.locale === 'en'
-                    ? 'absolute top-1/2 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700 focus:outline-none'
-                    : 'absolute top-1/2 left-0 flex items-center pl-3 text-gray-500 hover:text-gray-700 focus:outline-none'
-                "
-              >
-                <i
-                  :class="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"
-                  class="text-base transition-all duration-500"
-                ></i>
-              </button>
-            </div>
-          </div>
-
-          <div class="py-6">
-            <Button
-              :label="$t('reset.resetPass')"
-              class="!bg-[#19c5af] w-full text-sm rounded-xl !border-0 py-4"
+  <div class="flex h-screen justify-center">
+    <section class="flex-1 bg-main hidden lg:block">
+      <banner />
+    </section>
+    <section class="flex-1 flex flex-col items-center justify-center">
+      <div class="flex justify-center gap-3 items-center py-5">
+        <span>
+          <img src="@/assets/logo.png" alt="logo" />
+        </span>
+        <span class="text-xl font-semibold text-main"> WeQuickPay </span>
+      </div>
+      <div class="flex justify-center flex-col gap-3 items-center">
+        <span class="text-xl font-semibold text-slate-950"
+          >Forgotten Password ?
+        </span>
+        <span class="text-slate-800 text-center px-20 text-sm leading-relaxed">
+          Experiencing difficulty recalling your password? Fear not, as we've
+          got your back. Losing access to your account can be challenging, but
+          worry not; we're here to assist you in recovering it.</span
+        >
+      </div>
+      <form action="" class="relative mx-auto w-full md:w-auto px-[5%]">
+        <div class="my-5 flex flex-col justify-centerr">
+          <label for="email" class="block text-xs">Email</label>
+          <div class="mt-1">
+            <input
+              type="mail"
+              id="mail"
+              v-model="mail"
+              class="px-3 py-3 md:min-w-96 min-w-[100%] rounded-3xl bg-slate-100 border shadow-sm focus:outline-none hover:ring-gray-500 focus:border focus:border-gray-200 sm:text-sm"
+              placeholder="Enter your mail"
             />
           </div>
-        </form>
+        </div>
+
+        <div class="pt-10 pb-5">
+          <button
+            class="md:min-w-96 min-w-full  text-white py-3 rounded-3xl"
+            :class=" !mail ? 'bg-slate-300':'bg-main'"
+            :disabled="!mail"
+            
+          >
+           Send Instruction
+          </button>
+        </div>
+      </form>
+      <section class="flex justify-center gap-5 text-main">
+        <a href="" class="flex gap-2 items-center"
+          ><img src="@/assets/faqs.png" alt="Faqs" /> FAQs</a
+        ><a href="" class="flex gap-2 items-center"
+          ><img src="@/assets/support.svg" alt="Support" /> Contact Support</a
+        >
       </section>
-    </div>
-  </main>
+
+      <router-link class="text-main mt-10" to="/Reset-password"
+        >Forgot Password ?
+      </router-link>
+      <InputOtp v-model="value" integerOnly :length="6" />
+    </section>
+  </div>
 </template>
+<script setup>
+import { ref } from "vue";
+import banner from "../components/banner.vue";
+const showPassword = ref(false);
+
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
+};
+const isDisabled = ref(true)
+const mail = ref('')
+</script>

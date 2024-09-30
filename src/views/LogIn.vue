@@ -69,7 +69,7 @@
       ><a href="" class="flex gap-2 items-center"><img src="@/assets/support.svg" alt="Support" /> Contact Support</a>
     </section>
    
-       <router-link class="text-main mt-10">Forgot Password ? </router-link>
+       <router-link class="text-main mt-10" to="/Reset-password">Forgot Password ? </router-link>
 
     </section>
   </div>

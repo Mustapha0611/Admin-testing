@@ -14,12 +14,12 @@ const router = createRouter({
       component: () => import('../views/LogIn.vue')
     },
     {
-      path: '/verify-number',
-      name: 'verify-number',
+      path: '/New-password',
+      name: 'New-password',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/verifyPhoneNo.vue')
+      component: () => import('../views/new-password.vue')
     },
     {
       path: '/Reset-password',
