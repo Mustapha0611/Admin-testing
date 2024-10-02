@@ -2,7 +2,7 @@ export default {
     root: ({ props }) => ({
         class: [
             //Size and Shape
-            'w-96 rounded-md',
+            'w-[80%] md:w-[40%] rounded-md',
 
             // Positioning
             { '-translate-x-2/4': props.position == 'top-center' || props.position == 'bottom-center' }
@@ -20,7 +20,7 @@ export default {
                 'bg-green-50/90 dark:bg-green-500/20': props.message.severity == 'success',
                 'bg-surface-50 dark:bg-surface-800': props.message.severity == 'secondary',
                 'bg-orange-50/90 dark:bg-orange-500/20': props.message.severity == 'warn',
-                'bg-red-50/90 dark:bg-red-500/20': props.message.severity == 'error',
+                'bg-red-50/90 dark:bg-red-900': props.message.severity == 'error',
                 'bg-surface-950 dark:bg-surface-0': props.message.severity == 'contrast'
             },
             {

@@ -34,14 +34,13 @@
           </div>
         </div>
 
-        <div class="pt-10 pb-5">
+        <div class="py-5">
           <button
-            class="md:min-w-96 min-w-full  text-white py-3 rounded-3xl"
-            :class=" !mail ? 'bg-slate-300':'bg-main'"
+            class="md:min-w-96 min-w-full text-white py-3 rounded-3xl"
+            :class="!mail ? 'bg-slate-300' : 'bg-main'"
             :disabled="!mail"
-            
           >
-           Send Instruction
+            Send Instruction
           </button>
         </div>
       </form>
@@ -52,11 +51,6 @@
           ><img src="@/assets/support.svg" alt="Support" /> Contact Support</a
         >
       </section>
-
-      <router-link class="text-main mt-10" to="/Reset-password"
-        >Forgot Password ?
-      </router-link>
-      <InputOtp v-model="value" integerOnly :length="6" />
     </section>
   </div>
 </template>
@@ -64,10 +58,20 @@
 import { ref } from "vue";
 import banner from "../components/banner.vue";
 const showPassword = ref(false);
+import { useToast } from "primevue/usetoast";
 
-const togglePassword = () => {
-  showPassword.value = !showPassword.value;
+
+const toast = useToast();
+// const isDisabled = ref(true)
+const mail = ref("");
+
+const resetPass = () => {
+  if (!mail.value) {
+    toast.add({
+      severity: "error",
+      message: "Please enter a valid email",
+      life: 3000,
+    });
+  }
 };
-const isDisabled = ref(true)
-const mail = ref('')
 </script>

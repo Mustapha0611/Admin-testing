@@ -61,7 +61,7 @@
             <label for="Remember me"> Remember Password</label>
           </div>
           <div class="pt-10 pb-5 ">
-            <button class="md:min-w-96 min-w-full bg-main text-white py-3 rounded-3xl">Login</button>
+            <button class="md:min-w-96 min-w-full bg-main text-white py-3 rounded-3xl" @click.prevent="handleLogin">Login</button>
           </div>
       </form>
       <section class="flex justify-center gap-5 text-main">
@@ -76,10 +76,30 @@
 </template>
 <script setup>
 import{ ref } from 'vue'
+import { useToast } from "primevue/usetoast";
 import banner from "../components/banner.vue";
+
+const toast = useToast()
 const showPassword = ref(false)
+const mail = ref('') 
+const password = ref('') 
 
 const togglePassword = () =>{
   showPassword.value = !showPassword.value
+}
+const handleLogin = () =>{
+ if (!mail.value) {
+  toast.add({
+        severity: "error",
+        summary: "Pls enter valid email",
+        life: 3000,
+      });
+ } else if(!password.value){
+ toast.add({
+        severity: "error",
+        summary: "Fill in your password",
+        life: 3000,
+      });
+    }
 }
 </script>

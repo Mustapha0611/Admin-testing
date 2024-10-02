@@ -44,8 +44,8 @@
           <div class="mt-1">
             <input
               :type="showPassword2 ? 'text' : 'password'"
-              id="password"
-              v-model="password"
+              id="verify-password"
+              v-model="verifyPassword"
               class="block px-3 py-3 md:min-w-96 min-w-[100%] rounded-3xl bg-slate-100 border shadow-sm focus:outline-none hover:ring-gray-500 focus:border focus:border-gray-200 sm:text-sm"
               placeholder="Enter your password"
             />
@@ -65,8 +65,9 @@
         <div class="pt-10 pb-5">
           <button
             class="md:min-w-96 min-w-full bg-main text-white py-3 rounded-3xl"
+            @click.prevent="reset"
           >
-            Login
+           Reset Password
           </button>
         </div>
       </form>
@@ -83,13 +84,25 @@
 <script setup>
 import { ref } from "vue";
 import banner from "../components/banner.vue";
+import { useToast } from "primevue/usetoast";
 const showPassword1 = ref(false);
 const showPassword2 = ref(false)
-
+const password = ref('')
+const verifyPassword = ref ('')
+const toast = useToast()
 const togglePassword1 = () => {
   showPassword1.value = !showPassword1.value;
 };
 const togglePassword2 = () => {
   showPassword2.value = !showPassword2.value;
 };
+const reset = () =>{
+if(password.value !== verifyPassword.value){
+  toast.add({
+    severity:'error',
+    life:3000,
+    summary:'Password does not match'
+  })
+}
+}
 </script>
