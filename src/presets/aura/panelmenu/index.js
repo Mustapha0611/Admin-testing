@@ -1,6 +1,6 @@
 export default {
     panel: {
-        class: 'p-1 overflow-hidden mb-3 border border-surface-200 dark:border-surface-700 rounded-md'
+        class: ' overflow-hidden mb-3  dark:border-surface-700 rounded-md'
     },
     header: {
         class: ['rounded-[4px]', 'outline-none']
@@ -13,7 +13,7 @@ export default {
             // Color
             'bg-surface-0 dark:bg-surface-900',
             'text-surface-600 dark:text-surface-0/80',
-            { 'text-surface-900': context.active },
+            { 'text-orange-900': context.active },
 
             // States
             'hover:bg-surface-100 dark:hover:bg-[rgba(255,255,255,0.03)]',
@@ -110,7 +110,7 @@ export default {
         ]
     }),
     itemIcon: {
-        class: 'mr-2'
+        class: 'mr-0'
     },
     submenu: {
         class: 'p-0 pl-4 m-0 list-none'

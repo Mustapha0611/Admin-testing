@@ -14,7 +14,7 @@
         <span class="text-xl font-semibold text-slate-950"
           >Forgotten Password ?
         </span>
-        <span class="text-slate-800 text-center px-20 text-sm leading-relaxed">
+        <span class="text-slate-800 text-center px-5 md:px-20 text-sm leading-relaxed">
           Experiencing difficulty recalling your password? Fear not, as we've
           got your back. Losing access to your account can be challenging, but
           worry not; we're here to assist you in recovering it.</span

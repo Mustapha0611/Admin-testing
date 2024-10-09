@@ -66,8 +66,10 @@
           <button
             class="md:min-w-96 min-w-full bg-main text-white py-3 rounded-3xl"
             @click.prevent="reset"
+            :class="!password ?'bg-slate-200':''"
+            :disabled="!password"
           >
-           Reset Password
+           Save Password
           </button>
         </div>
       </form>
