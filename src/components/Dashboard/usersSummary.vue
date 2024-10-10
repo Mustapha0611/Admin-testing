@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-4 gap-3 py-5">
+    <div class="grid grid-cols-4 gap-4 py-5">
         <usersCard
         type="Total Users"
         text-color="#E9EDF7"
@@ -7,22 +7,22 @@
         :img=total
         :number="567" />
         <usersCard
-        type="Total Transaction"
+        type="New users"
         bg="white"
         :img=newuser
         :number="123" />
         <usersCard
-        type="Total Transaction"
+        type="Verified users"
         bg="white"
         :img=verified
         :number="89" />
-        <div class="flex justify-between flex-row-reverse p-4 rounded-xl bg-white">
+        <div class="flex justify-end gap-4 items-center flex-row-reverse p-2 rounded-xl bg-white">
         <section class="flex flex-col gap-2">
-            <p class="text-xs">Top transactional User</p>
+            <p class="text-xs font-light">Top transactional User</p>
             <p>Faith Ojunwa</p>
         </section>
         <section>
-            <img src="@/assets/trans.png" alt="total pay" class="h-14 w-14">
+            <img src="@/assets/trans.png" alt="total pay" class="h-10 w-10">
         </section>
     </div>
     </div>

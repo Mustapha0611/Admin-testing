@@ -1,6 +1,6 @@
 <template>
   <div class="w-72 h-screen bg-white px-10">
-    <section class="flex justify-center gap-3 items-center py-8">
+    <section class="flex justify-center gap-3 items-center py-4">
       <span>
         <img src="@/assets/logo.png" alt="logo" />
       </span>

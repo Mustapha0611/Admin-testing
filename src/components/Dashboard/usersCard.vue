@@ -1,14 +1,14 @@
 <template>
   <div
-    class="flex justify-between items-center p-4 rounded-xl"
+    class="flex justify-between items-center p-3 rounded-xl"
     :style="{ backgroundColor: bg, color: textColor }"
   >
-    <section class="flex flex-col gap-2">
-      <p class="text-sm">{{ type }}</p>
-      <p>{{ number }}</p>
+    <section class="flex flex-col  gap-1">
+      <p class="text-sm font-light">{{ type }}</p>
+      <p class="font-semibold">{{ number }}</p>
     </section>
     <section>
-      <img :src="img" alt="total pay" class="h-14 w-14" />
+      <img :src="img" alt="total pay" class="h-10 w-10" />
     </section>
   </div>
 </template>

@@ -3,10 +3,10 @@
         <section class="">
             <sideBar />
         </section>
-        <section class="py-8 px-10 flex-1">
+        <section class="py-4 px-4 flex-1">
             <headerContent />
             <usersSummary />
-            <div></div>
+            <TransactionDetails />
         </section>
     </div>
 </template>
@@ -14,4 +14,5 @@
 import sideBar from "../components/Dashboard/sideBar.vue"
 import headerContent from "@/components/Dashboard/headerContent.vue";
 import usersSummary from "@/components/Dashboard/usersSummary.vue";
+import TransactionDetails from "@/components/Dashboard/TransactionDetails.vue";
 </script>
