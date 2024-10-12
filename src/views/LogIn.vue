@@ -78,11 +78,13 @@
 import{ ref } from 'vue'
 import { useToast } from "primevue/usetoast";
 import banner from "../components/banner.vue";
+import { useRouter } from 'vue-router';
 
 const toast = useToast()
 const showPassword = ref(false)
 const mail = ref('') 
 const password = ref('') 
+const router = useRouter()
 
 const togglePassword = () =>{
   showPassword.value = !showPassword.value
@@ -100,6 +102,8 @@ const handleLogin = () =>{
         summary: "Fill in your password",
         life: 3000,
       });
+    }else{
+      router.push('/dashboard')
     }
 }
 </script>

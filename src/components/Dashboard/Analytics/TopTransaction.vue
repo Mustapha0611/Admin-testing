@@ -35,30 +35,30 @@
 
 <script setup>
 import { ref } from "vue";
-import tom from "@/assets/thomas.png";
+import thomas from "@/assets/thomas.png";
 // Data for transactions
 const transactions = ref([
-  { id: 1, name: "Ada Peters", amount: 5600.0, time: "10:23AM", image: tom },
+  { id: 1, name: "Ada Peters", amount: 5600.0, time: "10:23AM", image: thomas },
   {
     id: 2,
     name: "Ali Akambi",
     amount: 4789600.25,
     time: "05:02PM",
-    image: tom,
+    image: thomas,
   },
   {
     id: 3,
     name: "Linda Adams",
     amount: -507200.0,
     time: "08:55PM",
-    image: tom,
+    image: thomas,
   },
   {
     id: 4,
     name: "Ali Akambi",
     amount: 802600255.23,
     time: "10:15AM",
-    image: tom,
+    image: thomas,
   },
 ]);
 
