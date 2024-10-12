@@ -7,7 +7,7 @@
       <span class="text-xl font-semibold text-main"> WeQuickPay </span>
     </section>
     <div class="py-4">
-        <router-link to="" class="flex items-center px-4 py-2 gap-3 rounded-md bg-main text-white"><span class="pi pi-objects-column"></span><span>Dashboard</span></router-link>
+        <router-link to="/dashboard" class="flex items-center px-4 py-2 gap-3 rounded-md bg-main text-white"><span class="pi pi-objects-column"></span><span>Dashboard</span></router-link>
     </div>
     <div class="card flex w-full justify-center">
       <PanelMenu :model="items" class="w-full md:w-80" active>
@@ -19,17 +19,17 @@
             custom
           >
             <a
-              class="flex items-center text-3xl font-bold cursor-pointer text-surface-700 dark:text-surface-0 px-4 py-2"
+              class="flex items-center  cursor-pointer text-black dark:text-surface-0 px-4 py-2"
               :href="href"
               @click="navigate"
             >
-              <span :class="item.icon" />
+              <span :class="`${item.icon} text-[5px]`" />
               <span class="ml-2 text-xs">{{ item.label }}</span>
             </a>
           </router-link>
           <a
             v-else
-            class="flex items-center cursor-pointer text-surface-700 dark:text-surface-0 px-4 py-2"
+            class="flex items-center cursor-pointer text-black dark:text-surface-0 px-4 py-2"
             :href="item.url"
             :target="item.target"
           >
@@ -57,13 +57,13 @@ const items = ref([
     icon: "pi pi-user",
     items: [
       {
-        label: "Styled",
-        icon: "pi pi-eraser",
-        route: "/overview",
+        label: "All users",
+        icon: "pi pi-circle-fill",
+        route: "/AllUsers",
       },
       {
-        label: "Unstyled",
-        icon: "pi pi-heart",
+        label: "Agents",
+        icon: "pi pi-circle-fill",
         route: "/overview",
       },
     ],
@@ -74,12 +74,12 @@ const items = ref([
     items: [
       {
         label: "Vue.js",
-        icon: "pi pi-star",
+        icon: "pi pi-circle-fill",
         route: "https://vuejs.org/",
       },
       {
         label: "Vite.js",
-        icon: "pi pi-bookmark",
+        icon: "pi pi-circle-fill",
         route: "https://vuejs.org/",
       },
     ],
