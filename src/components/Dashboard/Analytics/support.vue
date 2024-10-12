@@ -40,7 +40,7 @@
 
 <script setup>
 import { ref } from "vue";
-import thomas from "@/assets/thomas.png";
+import thomas from "@/assets/Thomas.png";
 
 const tickets = ref([
   { id: 1, name: "Ada Peters", status: "pending", time: "10:23AM", image:thomas },

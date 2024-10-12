@@ -35,7 +35,7 @@
 
 <script setup>
 import { ref } from "vue";
-import thomas from "@/assets/thomas.png";
+import thomas from "@/assets/Thomas.png";
 // Data for transactions
 const transactions = ref([
   { id: 1, name: "Ada Peters", amount: 5600.0, time: "10:23AM", image: thomas },
