@@ -1,5 +1,5 @@
 <template>
-  <div class="w-72 h-screen bg-white px-10">
+  <div class="w-64 h-screen bg-white px-5">
     <section class="flex justify-center gap-3 items-center py-4">
       <span>
         <img src="@/assets/logo.png" alt="logo" />
@@ -9,8 +9,8 @@
     <div class="py-4">
         <router-link to="" class="flex items-center px-4 py-2 gap-3 rounded-md bg-main text-white"><span class="pi pi-objects-column"></span><span>Dashboard</span></router-link>
     </div>
-    <div class="card flex justify-center">
-      <PanelMenu :model="items" class="w-full md:w-80">
+    <div class="card flex w-full justify-center">
+      <PanelMenu :model="items" class="w-full md:w-80" active>
         <template #item="{ item }">
           <router-link
             v-if="item.route"
@@ -19,12 +19,12 @@
             custom
           >
             <a
-              class="flex items-center cursor-pointer text-surface-700 dark:text-surface-0 px-4 py-2"
+              class="flex items-center text-3xl font-bold cursor-pointer text-surface-700 dark:text-surface-0 px-4 py-2"
               :href="href"
               @click="navigate"
             >
               <span :class="item.icon" />
-              <span class="ml-2">{{ item.label }}</span>
+              <span class="ml-2 text-xs">{{ item.label }}</span>
             </a>
           </router-link>
           <a

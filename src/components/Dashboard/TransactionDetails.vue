@@ -2,8 +2,8 @@
   <div class="flex gap-2">
     <section class="w-[75%] bg-white rounded-lg p-4">
       <aside class="text-['#05004E']">
-        <h2 class="font-semibold text-base">Transaction</h2>
-        <p class="font-light text-xs">Transaction insight</p>
+        <h2 class="font-semibold text-xl">Transaction</h2>
+        <p class="font-light text-sm">Transaction insight</p>
       </aside>
       <div class="grid grid-cols-5 pt-6 mt-6 gap-2">
         <TransactionCard
@@ -48,19 +48,19 @@
     <section class="w-[25%] grid grid-cols-2 gap-x-2 gap-y-4 rounded-lg">
       <div class="rounded-lg bg-white py-3 px-2">
         <p class="text-[10px]">Blocked/Suspicious Accounts</p>
-        <span class="font-semibold text-base inline-block py-1">53</span>
+        <span class="font-semibold text-base inline-block py-2">53</span>
         <img src="@/assets/blocked.svg" alt="active" class="w-8 h-8" />
       </div>
       <div class="rounded-lg bg-white py-3 px-2">
         <p class="text-[10px]">Average Ticket Resolution Time</p>
-        <span class="font-semibold text-base inline-block py-1">2m 55s</span>
+        <span class="font-semibold text-base inline-block py-2">2m 55s</span>
         <img src="@/assets/active.svg" alt="active" class="w-8 h-8" />
       </div>
 
       <!-- Charts -->
       <div class="rounded-lg bg-white py-3 px-2">
         <p class="text-[10px]">Average Ticket Resolution Time</p>
-        <span class="font-semibold text-base inline-block py-1">24%</span>
+        <span class="font-semibold text-base inline-block py-2">24%</span>
         <Chart
           type="line"
           :data="userAccessData"
@@ -93,23 +93,21 @@ import Chart from "primevue/chart";
 
 const userAccessData = ref({
   labels: ["", "", "", "", "", ""],
-  datasets: [
-  {
+    datasets: [{
       label: 'User Access Logs',
       data: [5, 10, 15, 10, 15, 20],
-      borderColor: '#3b82f6', // Line color
-      backgroundColor: 'rgba(59, 130, 246, 0)', // Transparent background for the line dataset
-      fill: false, // No fill for the line dataset
+      borderColor:'#3b82f6',
+      borderWidth: 1,
+      radius: 0,
       tension: 0.4,
-      pointRadius: 0, // Remove the dots
+      
     },
     {
       label: 'Background Area', // Background dataset
-      // Set this data to be slightly lower than the line dataset to create the margin
-      data: [4, 9, 14, 9, 14, 19], // These values create the gap
-      backgroundColor: 'rgba(59, 130, 246, 0.2)', // Background color under the line
-      borderColor: 'transparent', // No border
-      fill: true, // Enable area filling
+      data: [4, 9, 14, 9, 14, 19], 
+      backgroundColor: 'rgba(59, 130, 246, 0.2)', 
+      borderColor: 'transparent',
+      fill: true, 
       pointRadius:0,
       tension: 0.4,
     }
@@ -117,17 +115,24 @@ const userAccessData = ref({
 });
 const supportTeamData = ref({
   labels: ["", "", "", "", "", ""],
-  datasets: [
-    {
-      label: "Support Team Performance",
-      data: [10, 14, 12, 15, 16, 14],
-      borderColor: "#3b82f6",
-      backgroundColor: 'rgba(59, 130, 246, 0.2)', // Background color under the line
+  datasets: [{
+      label: 'User Access Logs',
+      data: [5, 10, 15, 10, 15, 20],
+      borderColor:'#3b82f6',
+      borderWidth: 1,
+      radius: 0,
+      tension: 0.4,
       
-      fill: true, // Enable area filling
+    },
+    {
+      label: 'Background Area', // Background dataset
+      data: [4, 9, 14, 9, 14, 19], 
+      backgroundColor: 'rgba(59, 130, 246, 0.2)', 
+      borderColor: 'transparent',
+      fill: true, 
       pointRadius:0,
       tension: 0.4,
-    },
+    }
   ],
 });
 
@@ -146,11 +151,8 @@ const chartOptions = ref({
   plugins: {
     legend: {
       display: false, // Hide the legend
-    },
-    tooltip: {
-      enabled: false, // Hides tooltips (data labels)
-    },
-    
+    }
+
   },
   maintainAspectRatio: false,
 });

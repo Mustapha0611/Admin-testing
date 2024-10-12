@@ -7,7 +7,7 @@
       <section>
         <img :src="img" :alt="img" class="h-8 w-8" />
       </section>
-      <section class="flex flex-col gap-1">
+      <section class="flex flex-col gap-2">
         <p class="font-semibold">{{ number }}</p>
         <p class="text-[10px]" :style="{ color: textColor}">{{type}}</p>
         <p class="text-sm font-semibold">Transaction</p>
