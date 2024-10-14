@@ -5,7 +5,7 @@ export default {
             'inline-flex',
             'relative',
             // Shape
-            { 'rounded-md': parent.instance.$name !== 'InputGroup' },
+            { 'rounded-3xl': parent.instance.$name !== 'InputGroup' },
             { 'first:rounded-l-md rounded-none last:rounded-r-md': parent.instance.$name == 'InputGroup' },
             { 'border-0 border-y border-l last:border-r': parent.instance.$name == 'InputGroup' },
             { 'first:ml-0 ml-[-1px]': parent.instance.$name == 'InputGroup' && !props.showButtons },
@@ -28,8 +28,8 @@ export default {
             'duration-200',
 
             // States
-            { 'hover:border-surface-400 dark:hover:border-surface-600': !props.invalid },
-            { 'outline-none outline-offset-0 ring-1 ring-primary-500 dark:ring-primary-400 z-10': state.focused },
+            { 'hover:border-orange-500 dark:hover:border-surface-600': !props.invalid },
+            { 'outline-none outline-offset-0 ring-1 ring-orange-500 dark:ring-primary-400 z-10': state.focused },
 
             // Misc
             'cursor-pointer',
@@ -98,26 +98,28 @@ export default {
     overlay: {
         class: [
             // Colors
-            'bg-surface-0 dark:bg-surface-900',
+            'bg-surface-0/90 dark:bg-surface-900',
             'text-surface-700 dark:text-white/80',
 
             // Shape
             'border border-surface-300 dark:border-surface-700',
-            'rounded-md',
-            'shadow-md'
+            'rounded-xl',
+            'shadow-md',
+            'mt-2',
+            'overflow-hidden'
         ]
     },
     listContainer: {
         class: [
             // Sizing
-            'max-h-[200px]',
+            'max-h-[200px] ',
 
             // Misc
-            'overflow-auto'
+            'overflow-hidden'
         ]
     },
     list: {
-        class: 'p-1 list-none m-0'
+        class: ' list-none m-0'
     },
     option: ({ context }) => ({
         class: [
@@ -128,11 +130,12 @@ export default {
             'leading-none',
 
             // Spacing
-            'm-0 px-3 py-2',
+            'm-0  py-2 px-2',
             'first:mt-0 mt-[2px]',
 
             // Shape
-            'border-0 rounded',
+            'border-0',
+            
 
             // Colors
             {

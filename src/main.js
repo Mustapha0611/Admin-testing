@@ -14,6 +14,12 @@ const app = createApp(App);
 app.use(PrimeVue, {
   unstyled: true,
   pt: Aura,
+  theme:{
+    options:{
+      darkModeSelector:false
+    }
+  }
+ 
 });
 app.use(createPinia());
 app.use(router);
