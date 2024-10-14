@@ -33,47 +33,91 @@
     </section>
 
     <!-- Data Table -->
-    <table class="w-full border-collapse">
-  <thead>
-    <tr class="bg-main text-white">
-      <th class="py-3  w-1"></th> <!-- Placeholder for checkbox column -->
-      <th class="py-2 px-4 text-sm font-light text-start">Name</th>
-      <th class="py-2 px-4 text-sm font-light text-start">Account Type</th>
-      <th class="py-2 px-4 text-sm font-light text-start">Date Created</th>
-      <th class="py-2 px-4 text-sm font-light text-start">Status</th>
-      <th class="py-2 px-4 text-sm font-light text-start">Amount</th>
-      <th class="py-2 px-4 text-sm font-light text-start">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(account, index) in accounts" :key="index" class="border-b border-slate-300 text-sm">
-      <!-- Checkbox for each row -->
-      <td class="py-4 ">
-        <input type="checkbox" v-model="selectedAccounts" :value="account" />
-      </td>
-      <td class="py-2 px-4">{{ account.name }}</td>
-      <td class="py-2 px-4">
-        <div class="flex gap-2">
-          <span class="border rounded-2xl text-white text-[8px] px-4 py-1 "
-          :class="account.accountType.Personal ? 'bg-orange-400':'bg-gray-300'"
-          >Personal</span>
-          <span  class="border rounded-2xl text-white text-[8px] px-4 py-1 "
-          :class="account.accountType.Business ? 'bg-indigo-500':'bg-gray-300'"
-          >Business</span>
-        </div>
-      </td>
-      <td class="py-2 px-4">{{ account.dateCreated }}</td>
-      <td class="py-2 px-4">{{ account.status }}</td>
-      <td class="py-2 px-4">{{ account.amount }}</td>
-      <td class="py-2 px-4">
-        <!-- Actions (e.g., buttons) can be added here -->
-        <button class="text-blue-500 hover:underline">View</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-
+    <table class="w-full border-collapse mt-4">
+      <thead>
+        <tr class="bg-main text-white">
+          <th class="py-4 w-1"></th>
+          <!-- Placeholder for checkbox column -->
+          <th class="py-4 px-4 text-sm font-light text-start">Name</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Account Type</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Date Created</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Status</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Amount</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="(account, index) in filteredAccounts"
+          :key="index"
+          class="border-b border-slate-300 text-sm"
+        >
+          <!-- Checkbox for each row -->
+          <td class="py-4">
+            <input
+              type="checkbox"
+              v-model="selectedAccounts"
+              :value="account"
+              class="h-4 aspect-square accent-indigo-800"
+            />
+          </td>
+          <td class="py-6 px-4">{{ account.name }}</td>
+          <td class="py-6 px-4">
+            <span
+              class="rounded-2xl text-white text-[8px] px-2 py-1"
+              :class="
+                account.accountType.Personal ? 'bg-orange-400' : 'bg-gray-300'
+              "
+              >Personal</span
+            >
+            <span
+              class="rounded-2xl text-white text-[8px] px-2 py-1 ml-3"
+              :class="
+                account.accountType.Business ? 'bg-indigo-500' : 'bg-gray-300'
+              "
+              >Business</span
+            >
+          </td>
+          <td class="py-2 px-4">{{ account.dateCreated }}</td>
+          <td class="py-2 px-4 text-white">
+            <span
+              class="px-3 rounded-2xl py-1 text-[8px]"
+              :class="{
+                ' bg-green-600': account.status === 'Active',
+                'bg-yellow-600': account.status === 'Inactive',
+                'bg-red-600': account.status === 'Blocked',
+              }"
+              >{{ account.status }}</span
+            >
+          </td>
+          <td class="py-2 px-4">{{ account.amount }}</td>
+          <td class="px-4 relative">
+            <!-- Actions (e.g., buttons) can be added here -->
+            <button
+              @click="toggleMenu(index)"
+              aria-haspopup="true"
+              aria-controls="overlay_menu"
+              class="text-main text-[6px] text-center border rounded-md w-14 h-8 flex items-center justify-center gap-0.5"
+            >
+              <i class="pi pi-circle-fill"></i> <i class="pi pi-circle-fill"></i
+              ><i class="pi pi-circle-fill"></i>
+            </button>
+            <transition name="fade">
+              <ul
+                v-if="isMenuOpen(index)"
+                class="absolute mt-2 z-30  right-10 bg-gray-50 border rounded shadow-lg  w-40"
+              >
+                <li class="p-3 cursor-pointer font-semibold">Quick Actions</li>
+                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Delete</li>
+                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Block</li>
+                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Deactivate</li>
+                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Details</li>
+              </ul>
+            </transition>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
     <!-- Pagination -->
     <!-- <div class="flex justify-center mt-4">
@@ -88,12 +132,12 @@
 </template>
 
 <script setup>
-import checkbox from "@/presets/aura/checkbox";
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 
 // Sample data
 const selectedProduct = ref();
+const selectedAccounts = ref([]);
 const accounts = ref([
   {
     id: 1,
@@ -174,9 +218,20 @@ const accounts = ref([
     dateCreated: "02/12/2024",
     status: "Active",
     amount: "₦21,000,000.00",
-  }
+  },
 ]);
 
+
+// Manage the index of the open menu
+const openMenuIndex = ref(null);
+
+// Toggle the menu for the clicked item
+const toggleMenu = (index) => {
+  openMenuIndex.value = openMenuIndex.value === index ? null : index;
+};
+
+// Check if a menu is open
+const isMenuOpen = (index) => openMenuIndex.value === index;
 
 // Search, Filter, and Bulk Actions
 const searchQuery = ref("");
@@ -215,43 +270,17 @@ const filteredAccounts = computed(() => {
 
   return result;
 });
-
-// Actions template for the "Actions" column
-const router = useRouter();
-const actionsTemplate = (rowData) => {
-  return `
-      <Button label="..." icon="pi pi-ellipsis-h" @click="viewDetails(${rowData.id})" />
-    `;
-};
-
-// Navigate to the user's detail page dynamically
-const viewDetails = (id) => {
-  router.push(`/users/${id}`);
-};
-
-// Placeholder for updating and deleting users
-const updateUser = (rowData) => {
-  alert(`Update user: ${rowData.name}`);
-};
-const deleteUser = (rowData) => {
-  alert(`Delete user: ${rowData.name}`);
-};
-
-// Account Type Template
-const accountTypeTemplate = ({ accountType }) => {
-  return `
-      <div>
-        <span class="${
-          accountType.Personal ? "text-black" : "text-gray-400"
-        }">Personal</span> | 
-        <span class="${
-          accountType.Business ? "text-black" : "text-gray-400"
-        }">Business</span>
-      </div>
-    `;
-};
 </script>
 
 <style scoped>
 /* Add any additional Tailwind styling here if needed */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  transition: opacity 0.4s ease;
+  opacity: 0;
+}
 </style>

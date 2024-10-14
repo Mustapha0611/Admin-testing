@@ -103,7 +103,7 @@ export default {
 
             // Shape
             'border border-surface-300 dark:border-surface-700',
-            'rounded-2xl',
+            'rounded-xl',
             'shadow-md',
             'mt-2',
             'overflow-hidden'
