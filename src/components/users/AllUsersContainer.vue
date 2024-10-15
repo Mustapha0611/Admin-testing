@@ -105,17 +105,61 @@
             <transition name="fade">
               <ul
                 v-if="isMenuOpen(index)"
-                class="absolute mt-2 z-30  right-10 bg-gray-50 border rounded shadow-lg  w-40"
+                class="absolute mt-2 z-30 right-10 bg-gray-50 border rounded shadow-lg w-40"
               >
                 <li class="p-3 cursor-pointer font-semibold">Quick Actions</li>
-                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Delete</li>
-                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Block</li>
-                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Deactivate</li>
-                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">Details</li>
+                <li
+                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
+                  @click="promptDelete"
+                >
+                  Delete
+                </li>
+                <li
+                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
+                  @click="promptBlock"
+                >
+                  Block
+                </li>
+                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1" @click="promptDeactivate">
+                  Deactivate
+                </li>
+                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">
+                  Details
+                </li>
               </ul>
             </transition>
           </td>
         </tr>
+        <transition-group name="fade">
+          <confirmDialog
+            v-if="showDeletePopUp"
+            :img="deleteicon"
+            title="Notice"
+            message="Click 'Delete' to permanently remove
+          this user. If you're unsure, click 'cancel' to stop this action."
+            @confirm="confirmDelete"
+            @cancel="cancelDelete"
+            button="delete"
+          />
+          <confirmDialog
+            v-if="showBlockPopup"
+            :img="block"
+            title="Notice"
+            message="Click 'Block' to deny this user access to perform any transaction in WeQuickPay. If you're unsure, click 'Cancel' to stop this action."
+            @confirm="confirmBlock"
+            @cancel="cancelDelete"
+            button="Block"
+          />
+          <confirmDialog
+            v-if="showDeactivatePopUp"
+            :img="deactivate"
+            title="Notice"
+            message="Click 'Deactivate' to temporarily suspend this user's access to WeQuickPay. If you're uncertain, click 'Cancel' to abort this action."
+            @confirm="confirmDeactivate"
+            @cancel="cancelDelete"
+            button="Deactivate"
+          />
+        </transition-group>
       </tbody>
     </table>
 
@@ -134,10 +178,63 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import confirmDialog from "./confirmDialog.vue";
+import deleteicon from "@/assets/delete.svg";
+import block from "@/assets/blocked.svg";
+import deactivate from "@/assets/deactivate.svg";
 
-// Sample data
-const selectedProduct = ref();
 const selectedAccounts = ref([]);
+
+const showDeactivatePopUp = ref(false);
+const showBlockPopup = ref(false);
+const showDeletePopUp = ref(false);
+const selectedAccount = ref(null);
+
+// Function to prompt account deletion
+const promptDelete = (account) => {
+  selectedAccount.value = account; // Store the selected account
+  showDeletePopUp.value = true; // Open the modal
+};
+const promptBlock = (account) => {
+  selectedAccount.value = account; // Store the selected account
+  showBlockPopup.value = true; // Open the modal
+};
+
+const promptDeactivate = (account) => {
+  selectedAccount.value = account; // Store the selected account
+  showDeactivatePopUp.value = true; // Open the modal
+};
+
+
+// Function to confirm deletion
+const confirmDelete = async () => {
+  try {
+    const response = await axios.delete(
+      `https://api.example.com/accounts/${selectedAccount.value.id}`
+    );
+    if (response.status === 200) {
+      // Remove the account from the list after successful deletion
+      accounts.value = accounts.value.filter(
+        (account) => account.id !== selectedAccount.value.id
+      );
+      console.log("Account deleted successfully");
+    }
+  } catch (error) {
+    console.error("Error deleting account:", error);
+  } finally {
+    // Close the modal and clear the selected account
+    showDeletePopUp.value = false;
+    selectedAccount.value = null;
+  }
+};
+
+// Function to cancel deletion
+const cancelDelete = () => {
+  showDeactivatePopUp.value = false;
+  showBlockPopup.value = false;
+  showDeletePopUp.value = false; // Close the modal
+  selectedAccount.value = null; // Reset the selected account
+};
 const accounts = ref([
   {
     id: 1,
@@ -220,7 +317,6 @@ const accounts = ref([
     amount: "₦21,000,000.00",
   },
 ]);
-
 
 // Manage the index of the open menu
 const openMenuIndex = ref(null);
