@@ -124,7 +124,7 @@
                   Deactivate
                 </li>
                 <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">
-                  Details
+                  <router-link to="/user-details"> Details</router-link>
                 </li>
               </ul>
             </transition>
@@ -143,7 +143,7 @@
           />
           <confirmDialog
             v-if="showBlockPopup"
-            :img="block"
+            :img="deactivate"
             title="Notice"
             message="Click 'Block' to deny this user access to perform any transaction in WeQuickPay. If you're unsure, click 'Cancel' to stop this action."
             @confirm="confirmBlock"
@@ -180,7 +180,6 @@ import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import confirmDialog from "./confirmDialog.vue";
 import deleteicon from "@/assets/delete.svg";
-import block from "@/assets/blocked.svg";
 import deactivate from "@/assets/deactivate.svg";
 
 const selectedAccounts = ref([]);

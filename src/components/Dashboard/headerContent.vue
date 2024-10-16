@@ -1,10 +1,10 @@
 <template>
   <div class="flex">
-    <section class=" flex flex-col gap-4" v-if="route.path ==='/AllUsers'">
-      <span>
-        All Users / Users
-      </span>
-      <span class="text-2xl font-semibold">
+    <section class=" flex flex-col gap-4">
+      <aside v-if="route.path ==='/AllUsers'|| route.path==='/user-details'">
+        All Users / Users <span v-if="route.path ==='/user-details'"> / UserDetails</span>
+      </aside>
+      <span class="text-2xl font-semibold"> 
         WeQuickPay Users
       </span>
     </section>
