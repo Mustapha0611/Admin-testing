@@ -76,10 +76,13 @@
 </template>
 <script setup>
 import{ ref } from 'vue'
+import axios from '@/axios'
 import { useToast } from "primevue/usetoast";
 import banner from "../components/banner.vue";
 import { useRouter } from 'vue-router';
+import  { useAuthStore } from '../stores/auth';
 
+const auth = useAuthStore()
 const toast = useToast()
 const showPassword = ref(false)
 const mail = ref('') 
@@ -89,11 +92,11 @@ const router = useRouter()
 const togglePassword = () =>{
   showPassword.value = !showPassword.value
 }
-const handleLogin = () =>{
+const  handleLogin = async () =>{
  if (!mail.value) {
   toast.add({
         severity: "error",
-        summary: "Pls enter valid email",
+        summary: "Please enter valid email",
         life: 3000,
       });
  } else if(!password.value){
@@ -103,7 +106,30 @@ const handleLogin = () =>{
         life: 3000,
       });
     }else{
-      router.push('/dashboard')
+      try {
+        const response = await axios.post('/auth/login', {email: mail.value, password: password.value}, { withCredentials: true });
+        auth.setTokens({
+        access: response.data.data.authTokens.access,
+        refresh: response.data.data.authTokens.refresh,
+      });
+        console.log(response.data.data)
+        console.log(auth.accessToken)
+        console.log(auth.refreshToken)
+        router.push('/dashboard')
+        toast.add({
+          severity:'success',
+          summary:'login successful',
+          life:3000,
+        })
+      } catch (error) {
+        console.error('Login error:', error);
+        toast.add({
+        severity: "error",
+        summary: error.response.data.message,
+        life: 3000,
+      });
+      }
+     
     }
 }
 </script>
