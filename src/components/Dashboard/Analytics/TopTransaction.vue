@@ -21,12 +21,12 @@
         <div class="flex justify-between items-end gap-2">
           <p
             :class="transaction.amount >= 0 ? 'text-green-500' : 'text-red-500'"
-            class="text-sm"
+            class="text-xs"
           >
             {{ formatCurrency(transaction.amount) }}
           </p>
 
-          <div class="text-gray-500 text-xs">{{ transaction.time }}</div>
+          <div class="text-gray-500 text-[10px]">{{ transaction.time }}</div>
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@ const transactions = ref([
   {
     id: 4,
     name: "Ali Akambi",
-    amount: 802600255.23,
+    amount: 802600.23,
     time: "10:15AM",
     image: thomas,
   },

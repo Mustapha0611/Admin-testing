@@ -64,7 +64,7 @@ const items = ref([
       {
         label: "Agents",
         icon: "pi pi-circle-fill",
-        route: "/overview",
+        route: "/Agents",
       },
     ],
   },

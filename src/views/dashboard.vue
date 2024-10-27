@@ -12,9 +12,16 @@
     </div>
 </template>
 <script setup>
+import { onMounted } from "vue";
+import {useDetails} from '@/stores/usersDetail'
 import sideBar from "../components/Dashboard/sideBar.vue"
 import headerContent from "@/components/Dashboard/headerContent.vue";
 import usersSummary from "@/components/Dashboard/usersSummary.vue";
 import TransactionDetails from "@/components/Dashboard/TransactionDetails.vue";
 import AnalyticContainer from "@/components/Dashboard/Analytics/AnalyticContainer.vue";
+
+const aggregate = useDetails()
+onMounted(() => {
+ aggregate.getUsersAgg()
+})
 </script>
