@@ -16,7 +16,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async logOut() {
       try {
-        await axios.put('/auth/logout', {}, { withCredentials: true });
+        await axios.put('/auth/logout', {'refresh': this.refreshToken }, { withCredentials: true });
         this.accessToken = null;
         this.refreshToken = null;
         localStorage.removeItem('accessToken');

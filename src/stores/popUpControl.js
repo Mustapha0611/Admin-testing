@@ -7,7 +7,8 @@ export const usepopUpControl = defineStore('popUpControl', {
     showDeletePopUp: false,
     showBlockPopup: false,
     showDeactivatePopUp: false,
-    showUpdateModal:false
+    showUpdateModal:false,
+    showAddAgent:false
   }),
   
   actions: {
@@ -33,6 +34,9 @@ export const usepopUpControl = defineStore('popUpControl', {
     },
     openModal(){
       this.showUpdateModal = true
+    },
+    showModal(){
+      this.showAddAgent = true
     }
   }
 });

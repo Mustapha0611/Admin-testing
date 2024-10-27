@@ -23,7 +23,7 @@
         <p class="font-semibold">{{ ticket.name }}</p>
         <section class="flex justify-between items-end gap-2">
           <p
-            class="text-sm"
+            class="text-xs"
             :class="
               ticket.status === 'close' ? 'text-green-500' : 'text-red-500'
             "
@@ -31,7 +31,7 @@
             {{ ticket.status }}
           </p>
 
-          <div class="text-gray-500 text-xs">{{ ticket.time }}</div>
+          <div class="text-gray-500 text-[10px]">{{ ticket.time }}</div>
         </section>
       </div>
     </div>
