@@ -1,6 +1,6 @@
 <template>
-  <div class="flex">
-    <section class="flex flex-col gap-4">
+  <div class="flex justify-between">
+    <section class="flex flex-col gap-4 border">
       <aside
         v-if="
           route.path === '/AllUsers' ||
@@ -14,7 +14,7 @@
       </aside>
       <span class="text-2xl font-semibold"> WeQuickPay Users </span>
     </section>
-    <section class="flex ml-auto items-start gap-5">
+    <section class="flex ml-auto items-start gap-5 border">
       <button class="flex items-center gap-2 bg-white px-3 py-3 rounded-3xl">
         <img src="@/assets/menu.svg" alt="" /><span class="text-xs">Menu</span>
       </button>

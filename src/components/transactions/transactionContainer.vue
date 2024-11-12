@@ -39,15 +39,17 @@
           <th class="py-4 w-1"></th>
           <!-- Placeholder for checkbox column -->
           <th class="py-4 px-4 text-sm font-light text-start">Name</th>
-          <th class="py-4 px-4 text-sm font-light text-start">Role</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Account Type</th>
           <th class="py-4 px-4 text-sm font-light text-start">Date Created</th>
           <th class="py-4 px-4 text-sm font-light text-start">Status</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Amount</th>
           <th class="py-4 px-4 text-sm font-light text-start">Actions</th>
         </tr>
       </thead>
       <tbody>
+        
         <tr
-          v-for="(account, index) in filteredAccounts"
+          v-for="(account, index) in filteredTransactions"
           :key="index"
           class="border-b border-slate-300 text-sm"
         >
@@ -62,7 +64,20 @@
           </td>
           <td class="py-6 px-4">{{ account.name }}</td>
           <td class="py-6 px-4">
-            {{ account.role }}
+            <span
+              class="rounded-2xl text-white text-[8px] px-2 py-1"
+              :class="
+                account.accountType.Personal ? 'bg-orange-400' : 'bg-gray-300'
+              "
+              >Personal</span
+            >
+            <span
+              class="rounded-2xl text-white text-[8px] px-2 py-1 ml-3"
+              :class="
+                account.accountType.Business ? 'bg-indigo-500' : 'bg-gray-300'
+              "
+              >Business</span
+            >
           </td>
           <td class="py-2 px-4">{{ account.dateCreated }}</td>
           <td class="py-2 px-4 text-white">
@@ -70,13 +85,13 @@
               class="px-3 rounded-2xl py-1 text-[8px]"
               :class="{
                 ' bg-green-600': account.status === 'Active',
-                'bg-slate-200': account.status === 'Deactivated',
+                'bg-yellow-600': account.status === 'Inactive',
                 'bg-red-600': account.status === 'Blocked',
               }"
               >{{ account.status }}</span
             >
           </td>
-
+          <td class="py-2 px-4">{{ account.amount }}</td>
           <td class="px-4 relative">
             <!-- Actions (e.g., buttons) can be added here -->
             <button
@@ -91,28 +106,28 @@
             <transition name="fade">
               <ul
                 v-if="isMenuOpen(index)"
-                class="absolute z-30 right-20 bg-gray-50 border rounded shadow-lg w-40"
+                class="absolute mt-2 z-30 right-10 bg-gray-50 border rounded shadow-lg w-40"
               >
                 <li class="p-3 cursor-pointer font-semibold">Quick Actions</li>
                 <li
-                  class="hover:bg-blue-100/70 px-2 py-2 cursor-pointer mt-1"
+                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
                   @click="popUpControl.promptDelete"
                 >
                   Delete
                 </li>
                 <li
-                  class="hover:bg-blue-100/70 px-2 py-2 cursor-pointer mt-1"
+                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
                   @click="popUpControl.promptBlock"
                 >
                   Block
                 </li>
                 <li
-                  class="hover:bg-blue-100/70 px-2 py-2 cursor-pointer mt-1"
+                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
                   @click="popUpControl.promptDeactivate"
                 >
                   Deactivate
                 </li>
-                <li class="hover:bg-blue-100/70 px-2 py-2 cursor-pointer mt-1">
+                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">
                   <router-link to="/user-details"> Details</router-link>
                 </li>
               </ul>
@@ -167,7 +182,7 @@
 
 <script setup>
 import { ref, computed } from "vue";
-//   import { useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import confirmDialog from "@/components/users/confirmDialog.vue";
 import deleteicon from "@/assets/delete.svg";
 import deactivate from "@/assets/deactivate.svg";
@@ -212,84 +227,94 @@ const confirmDelete = async () => {
 
 // Function to cancel deletion
 
-const accounts = ref([
+const Transactions = ref([
   {
     id: 1,
     name: "Faith Ujunwa",
-    role: "Admin",
+    accountType: { Personal: true, Business: true },
     dateCreated: "10/02/2024",
+    timeCreated: "04:54 AM",
     status: "Active",
     amount: "₦10,000,000.00",
   },
   {
     id: 2,
     name: "Adamu Musa",
-    role: "Support",
+    accountType: { Personal: true, Business: false },
     dateCreated: "10/02/2024",
+    timeCreated: "08:22 PM",
     status: "Blocked",
     amount: "₦54,040,078,801.00",
   },
   {
     id: 3,
     name: "Sarah Ruth Tobaa",
-    role: "Support",
+    accountType: { Personal: true, Business: false },
     dateCreated: "10/02/2024",
+    timeCreated: "06:01 PM",
     status: "Active",
     amount: "₦64,000,000.45",
   },
   {
     id: 4,
     name: "James Ikeme",
-    role: "Admin",
+    accountType: { Personal: false, Business: true },
     dateCreated: "11/04/2023",
-    status: "Deactivated",
+    timeCreated: "09:15 AM",
+    status: "Inactive",
     amount: "₦5,250,000.00",
   },
   {
     id: 5,
     name: "Chinelo Chidi",
-    role: "Support",
+    accountType: { Personal: true, Business: false },
     dateCreated: "07/20/2023",
+    timeCreated: "11:45 AM",
     status: "Active",
     amount: "₦850,200.50",
   },
   {
     id: 6,
     name: "Abubakar Yusuf",
-    role: "Admin",
+    accountType: { Personal: false, Business: true },
     dateCreated: "01/15/2023",
+    timeCreated: "02:30 PM",
     status: "Blocked",
     amount: "₦40,500,000.00",
   },
   {
     id: 7,
     name: "Miriam Obinna",
-    role: "Admin",
+    accountType: { Personal: true, Business: true },
     dateCreated: "03/10/2024",
+    timeCreated: "10:40 AM",
     status: "Active",
     amount: "₦12,700,300.00",
   },
   {
     id: 8,
     name: "Sani Bello",
-    role: "Admin",
+    accountType: { Personal: false, Business: true },
     dateCreated: "06/08/2023",
+    timeCreated: "04:18 PM",
     status: "Active",
     amount: "₦33,900,000.99",
   },
   {
     id: 9,
     name: "Ngozi Okechukwu",
-    role: "Support",
+    accountType: { Personal: true, Business: false },
     dateCreated: "09/30/2023",
-    status: "Deactivated",
+    timeCreated: "07:25 PM",
+    status: "Inactive",
     amount: "₦1,500,000.75",
   },
   {
     id: 10,
     name: "Tunde Akinola",
-    role: "Support",
+    accountType: { Personal: true, Business: false },
     dateCreated: "02/12/2024",
+    timeCreated: "12:00 PM",
     status: "Active",
     amount: "₦21,000,000.00",
   },
@@ -314,15 +339,19 @@ const bulkActions = ref([
   { name: "Deactivate" },
 ]);
 const selectedBulkAction = ref(null);
-const filterOptions = ref([{ name: "Support" }, { name: "Admin" }]);
+const filterOptions = ref([
+  { name: "Personal Account" },
+  { name: "Business Account" },
+]);
 const selectedFilter = ref(null);
 
 // Pagination
 const currentPage = ref(1);
 
 // Dynamic filtering of accounts based on search and filter
-const filteredAccounts = computed(() => {
-  let result = accounts.value;
+const filteredTransactions = computed(() => {
+  // Filter transactions by search query and filter option
+  let result = Transactions.value;
 
   if (searchQuery.value) {
     result = result.filter((account) =>
@@ -331,15 +360,32 @@ const filteredAccounts = computed(() => {
   }
 
   if (selectedFilter.value) {
-    if (selectedFilter.value.name === "Admin") {
-      result = result.filter((account) => account.role === "Admin");
-    } else if (selectedFilter.value.name === "Support") {
-      result = result.filter((account) => account.role === "Support");
+    if (selectedFilter.value.name === "Personal Account") {
+      result = result.filter((account) => account.accountType.Personal);
+    } else if (selectedFilter.value.name === "Business Account") {
+      result = result.filter((account) => account.accountType.Business);
     }
   }
-
+   // Sort by date descending
+   result.sort((a, b) => new Date(a.dateCreated) - new Date(b.dateCreated));
   return result;
 });
+
+const isNewDate = (date, index) => {
+  // Check if the current date is different from the previous item’s date
+  return index === 0 || filteredTransactions.value[index - 1].dateCreated !== date;
+};
+
+const getDateLabel = (date) => {
+  const today = new Date().toISOString().split("T")[0];
+  return date === today ? "Today" : formatDate(date);
+};
+
+const formatDate = (date) => {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(date).toLocaleDateString(undefined, options);
+};
+
 </script>
 
 <style scoped>

@@ -73,15 +73,10 @@ const items = ref([
     icon: "pi pi-arrow-right-arrow-left",
     items: [
       {
-        label: "Vue.js",
+        label: "All transaction",
         icon: "pi pi-circle-fill",
-        route: "https://vuejs.org/",
-      },
-      {
-        label: "Vite.js",
-        icon: "pi pi-circle-fill",
-        route: "https://vuejs.org/",
-      },
+        route: "/Transactions",
+      }
     ],
   },
   {
