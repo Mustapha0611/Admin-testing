@@ -168,7 +168,7 @@
 <script setup>
 import { ref, computed } from "vue";
 //   import { useRouter } from "vue-router";
-import confirmDialog from "@/components/users/confirmDialog.vue";
+import confirmDialog from "@/components/util/confirmDialog.vue";
 import deleteicon from "@/assets/delete.svg";
 import deactivate from "@/assets/deactivate.svg";
 import { usepopUpControl } from "@/stores/popUpControl.js";

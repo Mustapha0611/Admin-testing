@@ -13,7 +13,7 @@
     </div>
 </template>
 <script setup>
-import sideBar from '@/components/Dashboard/sideBar.vue';
-import headerContent from '@/components/Dashboard/headerContent.vue';
+import sideBar from '@/components/util/sideBar.vue';
+import headerContent from '@/components/util/headerContent.vue';
 import transactionContainer from '@/components/transactions/transactionContainer.vue';
 </script>

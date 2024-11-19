@@ -13,11 +13,12 @@
           {{ message }}
         </p>
         <div class="flex gap-10 mt-6">
+          
           <button
             class="border border-main px-8 py-2 rounded-3xl text-sm"
             @click="onCancel"
           >
-            Cancel
+            {{button ==='Cancel'? 'Not sure' : 'Cancel'}}
           </button>
           <button
             class="border border-main px-8 py-2 rounded-3xl text-sm bg-main text-white"
@@ -35,6 +36,27 @@
           </button>
           <button
             class="border border-main px-8 py-2 rounded-3xl text-sm bg-main text-white"
+            v-if="button === 'Reverse'"
+            @click="onConfirm"
+          >
+            {{ button }}
+          </button>
+          <button
+            class="border border-main px-8 py-2 rounded-3xl text-sm bg-main text-white"
+            v-if="button === 'Refund'"
+            @click="onConfirm"
+          >
+            {{ button }}
+          </button>
+          <button
+            class="border border-main px-8 py-2 rounded-3xl text-sm bg-main text-white"
+            v-if="button === 'Cancel'"
+            @click="onConfirm"
+          >
+            {{ button }}
+          </button>
+          <button
+            class="border border-main px-8 py-2 rounded-3xl text-sm bg-main text-white"
             v-if="button === 'Block'"
             @click="onConfirm"
           >
@@ -46,6 +68,8 @@
   </template>
   
   <script setup>
+import { ref } from 'vue';
+
   const props = defineProps({
     title: String,
     img: String,
@@ -53,6 +77,7 @@
     message: String,
   });
   
+  // const cancel = ref(button)
   const emit = defineEmits(["confirm", "cancel"]);
   
   const onConfirm = () => {

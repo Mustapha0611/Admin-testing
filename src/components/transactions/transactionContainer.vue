@@ -34,144 +34,134 @@
 
     <!-- Data Table -->
     <table class="w-full border-collapse mt-4">
-      <thead>
-        <tr class="bg-main text-white">
+    
+       
+            <tbody class="w-full">
+                
+        <tr class="bg-main text-white w-full">
           <th class="py-4 w-1"></th>
           <!-- Placeholder for checkbox column -->
           <th class="py-4 px-4 text-sm font-light text-start">Name</th>
           <th class="py-4 px-4 text-sm font-light text-start">Account Type</th>
-          <th class="py-4 px-4 text-sm font-light text-start">Date Created</th>
+          <th class="py-4 px-4 text-sm font-light text-start">Transfer Time</th>
           <th class="py-4 px-4 text-sm font-light text-start">Status</th>
           <th class="py-4 px-4 text-sm font-light text-start">Amount</th>
           <th class="py-4 px-4 text-sm font-light text-start">Actions</th>
         </tr>
-      </thead>
-      <tbody>
-        
-        <tr
-          v-for="(account, index) in filteredTransactions"
-          :key="index"
-          class="border-b border-slate-300 text-sm"
+  <template v-for="(account, index) in filteredTransactions" :key="index">
+    <!-- Date Header Row -->
+    <tr v-if="isNewDate(account.dateCreated, index)" >
+      <td colspan="10" class="  pt-6 font-semibold text-gray-900">
+        {{ getDateLabel(account.dateCreated) }}
+      </td>
+    </tr>
+
+    <!-- Transaction Row -->
+    <tr class="border-b border-slate-300 text-sm">
+      <td class="py-4">
+        <input
+          type="checkbox"
+          v-model="selectedAccounts"
+          :value="account"
+          class="h-4 aspect-square accent-indigo-800"
+        />
+      </td>
+      <td class="py-6 px-4">{{ account.name }}</td>
+      <td class="py-6 px-4">
+        <span
+          class="rounded-2xl text-white text-[8px] px-2 py-1"
+          :class="account.accountType.Personal ? 'bg-orange-400' : 'bg-gray-300'"
         >
-          <!-- Checkbox for each row -->
-          <td class="py-4">
-            <input
-              type="checkbox"
-              v-model="selectedAccounts"
-              :value="account"
-              class="h-4 aspect-square accent-indigo-800"
-            />
-          </td>
-          <td class="py-6 px-4">{{ account.name }}</td>
-          <td class="py-6 px-4">
-            <span
-              class="rounded-2xl text-white text-[8px] px-2 py-1"
-              :class="
-                account.accountType.Personal ? 'bg-orange-400' : 'bg-gray-300'
-              "
-              >Personal</span
-            >
-            <span
-              class="rounded-2xl text-white text-[8px] px-2 py-1 ml-3"
-              :class="
-                account.accountType.Business ? 'bg-indigo-500' : 'bg-gray-300'
-              "
-              >Business</span
-            >
-          </td>
-          <td class="py-2 px-4">{{ account.dateCreated }}</td>
-          <td class="py-2 px-4 text-white">
-            <span
-              class="px-3 rounded-2xl py-1 text-[8px]"
-              :class="{
-                ' bg-green-600': account.status === 'Active',
-                'bg-yellow-600': account.status === 'Inactive',
-                'bg-red-600': account.status === 'Blocked',
-              }"
-              >{{ account.status }}</span
-            >
-          </td>
-          <td class="py-2 px-4">{{ account.amount }}</td>
-          <td class="px-4 relative">
-            <!-- Actions (e.g., buttons) can be added here -->
-            <button
-              @click="toggleMenu(index)"
-              aria-haspopup="true"
-              aria-controls="overlay_menu"
-              class="text-main text-[6px] text-center border rounded-md w-14 h-8 flex items-center justify-center gap-0.5"
-            >
-              <i class="pi pi-circle-fill"></i> <i class="pi pi-circle-fill"></i
-              ><i class="pi pi-circle-fill"></i>
-            </button>
-            <transition name="fade">
-              <ul
-                v-if="isMenuOpen(index)"
-                class="absolute mt-2 z-30 right-10 bg-gray-50 border rounded shadow-lg w-40"
-              >
-                <li class="p-3 cursor-pointer font-semibold">Quick Actions</li>
-                <li
-                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
-                  @click="popUpControl.promptDelete"
-                >
-                  Delete
-                </li>
-                <li
-                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
-                  @click="popUpControl.promptBlock"
-                >
-                  Block
-                </li>
-                <li
-                  class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1"
-                  @click="popUpControl.promptDeactivate"
-                >
-                  Deactivate
-                </li>
-                <li class="hover:bg-gray-200 px-2 py-2 cursor-pointer mt-1">
-                  <router-link to="/user-details"> Details</router-link>
-                </li>
-              </ul>
-            </transition>
-          </td>
-        </tr>
+          Personal
+        </span>
+        <span
+          class="rounded-2xl text-white text-[8px] px-2 py-1 ml-3"
+          :class="account.accountType.Business ? 'bg-indigo-500' : 'bg-gray-300'"
+        >
+          Business
+        </span>
+      </td>
+      <td class="py-2 px-4">{{ account.timeCreated }}</td>
+      <td class="py-2 px-4 text-white">
+        <span
+          class="px-3 rounded-2xl py-1 text-[8px]"
+          :class="{
+            'bg-green-600': account.status === 'Active',
+            'bg-yellow-600': account.status === 'Inactive',
+            'bg-red-600': account.status === 'Blocked',
+          }"
+        >
+          {{ account.status }}
+        </span>
+      </td>
+      <td class="py-2 px-4">{{ account.amount }}</td>
+      <td class="px-4 relative">
+        <button
+          @click="toggleMenu(index)"
+          aria-haspopup="true"
+          aria-controls="overlay_menu"
+          class="text-main text-[6px] text-center border rounded-md w-14 h-8 flex items-center justify-center gap-0.5"
+        >
+          <i class="pi pi-circle-fill"></i> <i class="pi pi-circle-fill"></i><i class="pi pi-circle-fill"></i>
+        </button>
+        <!-- Action Menu -->
+        <transition name="fade">
+          <ul
+            v-if="isMenuOpen(index)"
+            class="absolute mt-2 z-30 right-10 bg-gray-50 border rounded shadow-lg w-40"
+          >
+            <li class="p-3 cursor-pointer font-semibold">Quick Actions</li>
+            <li class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptReverse">Reverse</li>
+            <li class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptRefund">Refund</li>
+            <li class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptCancel">Cancel</li>
+           
+          </ul>
+        </transition>
+      </td>
+    </tr>
+  </template>
+</tbody>
+
+            
+      
         <transition-group name="fade">
           <confirmDialog
-            v-if="popUpControl.showDeletePopUp"
-            :img="deleteicon"
-            title="Notice"
-            message="Click 'Delete' to permanently remove this user. If you're unsure, click 'Cancel' to stop this action."
+            v-if="popUpControl.showReversePopUp"
+            :img="reverse"
+            title="Reverse Transaction"
+            message="Click 'Reverse' to reverse this transaction. If you're unsure, click 'Cancel' to stop this action."
             @confirm="confirmDelete"
             @cancel="popUpControl.cancelDelete"
-            button="Delete"
+            button="Reverse"
           />
 
           <confirmDialog
-            v-if="popUpControl.showBlockPopup"
-            :img="deactivate"
-            title="Notice"
-            message="Click 'Block' to deny this user access to perform any transaction in WeQuickPay. If you're unsure, click 'Cancel' to stop this action."
+            v-if="popUpControl.showRefundPopUp"
+            :img="refund"
+            title="Refund Transaction"
+            message="Click 'Refund' to refund this transaction. If you're unsure, click 'Cancel' to stop this action."
             @confirm="confirmBlock"
             @cancel="popUpControl.cancelDelete"
-            button="Block"
+            button="Refund"
           />
 
           <confirmDialog
-            v-if="popUpControl.showDeactivatePopUp"
-            :img="deactivate"
-            title="Notice"
-            message="Click 'Deactivate' to temporarily suspend this user's access to WeQuickPay. If you're uncertain, click 'Cancel' to abort this action."
+            v-if="popUpControl.showCancelPopUp"
+            :img="cancelation"
+            title="Cancel Transaction"
+            message="Click 'Cancel' to discontinue this transaction. If you're unsure, click 'Not sure' to stop this action."
             @confirm="confirmDeactivate"
             @cancel="popUpControl.cancelDelete"
-            button="Deactivate"
+            button="Cancel"
           />
         </transition-group>
-      </tbody>
+      
     </table>
 
     <!-- Pagination -->
     <!-- <div class="flex justify-center mt-4">
           <Pagination
-            v-model:page="currentPage"
+            v-mode:page="currentPage"
             :total-records="filteredAccounts.length"
             rows="10"
             :rows-per-page-options="[10, 20, 50]"
@@ -183,9 +173,11 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
-import confirmDialog from "@/components/users/confirmDialog.vue";
-import deleteicon from "@/assets/delete.svg";
-import deactivate from "@/assets/deactivate.svg";
+import confirmDialog from "@/components/util/confirmDialog.vue";
+import reverse from "@/assets/reverse.png";
+import refund from "@/assets/refund.png";
+import cancelation from "@/assets/blockprofile.png";
+
 import { usepopUpControl } from "@/stores/popUpControl.js";
 const selectedAccounts = ref([]);
 
@@ -367,7 +359,7 @@ const filteredTransactions = computed(() => {
     }
   }
    // Sort by date descending
-   result.sort((a, b) => new Date(a.dateCreated) - new Date(b.dateCreated));
+   result.sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
   return result;
 });
 

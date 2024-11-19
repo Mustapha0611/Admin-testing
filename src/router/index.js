@@ -70,7 +70,12 @@ const router = createRouter({
       path:'/Transactions',
       name:'Transactions',
       component:()=> import('../views/Transactions.vue')
-    }
+    },
+    {
+      path:'/VerifyKYC',
+      name:'VerifyKYC',
+      component:()=> import('../views/Kyc.vue')
+  },
 
   ]
 })

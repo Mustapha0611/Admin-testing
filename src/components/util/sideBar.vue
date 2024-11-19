@@ -83,7 +83,11 @@ const items = ref([
     label:"KYC verification",
     icon:"pi pi-check-circle",
     items:[
-
+    {
+        label: "Verify KYC",
+        icon: "pi pi-circle-fill",
+        route: "/VerifyKyc",
+      }
     ]
   },
   {

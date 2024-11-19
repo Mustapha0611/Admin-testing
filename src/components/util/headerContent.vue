@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between">
-    <section class="flex flex-col gap-4 border">
+    <section class="flex flex-col gap-4 ">
       <aside
         v-if="
           route.path === '/AllUsers' ||
@@ -12,9 +12,12 @@
         <span v-if="route.path === '/Agents'"> / Agents</span>
         <span v-if="route.path === '/user-details'"> / UserDetails</span>
       </aside>
+      <span v-if="route.path === '/Transactions'">Transactions</span>
+      <span v-if="route.path === '/VerifyKyc'">KYC verification</span>
       <span class="text-2xl font-semibold"> WeQuickPay Users </span>
+      <!-- <span class="text-2xl font-semibold" v-if="route.path === '/Transactions'"> WeQuickPay Users </span> -->
     </section>
-    <section class="flex ml-auto items-start gap-5 border">
+    <section class="flex  items-start gap-5 ">
       <button class="flex items-center gap-2 bg-white px-3 py-3 rounded-3xl">
         <img src="@/assets/menu.svg" alt="" /><span class="text-xs">Menu</span>
       </button>
