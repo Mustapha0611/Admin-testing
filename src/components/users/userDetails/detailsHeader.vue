@@ -53,7 +53,7 @@
     </div>
 </template>
 <script setup>
-import confirmDialog from "../confirmDialog.vue";
+import confirmDialog from "../../util/confirmDialog.vue";
 import deleteicon from "@/assets/delete.svg";
 import deactivate from "@/assets/deactivate.svg";
 import { usepopUpControl } from "@/stores/popUpControl.js";
