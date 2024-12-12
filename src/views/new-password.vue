@@ -85,7 +85,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import banner from "../components/banner.vue";
+import banner from "../components/util/banner.vue";
 import { useToast } from "primevue/usetoast";
 const showPassword1 = ref(false);
 const showPassword2 = ref(false)

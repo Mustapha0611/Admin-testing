@@ -111,10 +111,10 @@
             class="absolute mt-2 z-30 right-10 bg-gray-50 border rounded shadow-lg w-40"
           >
             <li class="p-3 cursor-pointer font-semibold">Quick Actions</li>
-            <li class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptReverse">Reverse</li>
-            <li class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptRefund">Refund</li>
-            <li class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptCancel">Cancel</li>
-           
+            <li tabindex="0" class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptReverse">Reverse</li>
+            <li tabindex="0" class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptRefund">Refund</li>
+            <li tabindex="0" class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1" @click="popUpControl.promptCancel">Cancel</li>
+            <li tabindex="0" class="hover:bg-gray-200/50 text-gray-500 px-2 py-2 cursor-pointer mt-1"><router-link to="/transaction-details"> details</router-link></li>
           </ul>
         </transition>
       </td>
@@ -176,7 +176,7 @@ import { useRouter } from "vue-router";
 import confirmDialog from "@/components/util/confirmDialog.vue";
 import reverse from "@/assets/reverse.png";
 import refund from "@/assets/refund.png";
-import cancelation from "@/assets/blockprofile.png";
+import cancelation from "@/assets/cancelation.png";
 
 import { usepopUpControl } from "@/stores/popUpControl.js";
 const selectedAccounts = ref([]);

@@ -78,7 +78,7 @@
 import{ ref } from 'vue'
 import axios from '@/axios'
 import { useToast } from "primevue/usetoast";
-import banner from "../components/banner.vue";
+import banner from "../components/util/banner.vue";
 import { useRouter } from 'vue-router';
 import  { useAuthStore } from '../stores/auth';
 

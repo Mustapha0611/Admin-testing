@@ -48,7 +48,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import banner from "../components/banner.vue";
+import banner from "../components/util/banner.vue";
 const showPassword = ref(false);
 
 const togglePassword = () => {
