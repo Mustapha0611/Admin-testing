@@ -101,14 +101,22 @@ const items = ref([
     label:"Notification",
     icon:"pi pi-bell",
     items:[
-
+    {
+        label: "All Notifications",
+        icon: "pi pi-circle-fill",
+        route: "/Notification",
+      }
     ]
   },
   {
     label:"Setting",
     icon:"pi pi-cog",
     items:[
-
+    {
+        label: "All Settings",
+        icon: "pi pi-circle-fill",
+        route: "/Settings",
+      }
     ]
   },
 ]);

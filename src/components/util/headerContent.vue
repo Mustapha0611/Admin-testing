@@ -14,6 +14,8 @@
       </aside>
       <span v-if="route.path === '/Transactions' || route.path==='/transaction-details'">Transactions</span>
       <span v-if="route.path === '/VerifyKyc' || route.path==='/kyc-details'">KYC verification</span>
+      <span v-if="route.path === '/Settings'">All Settings</span>
+      <span v-if="route.path === '/Notifications' || route.path==='/kyc-details'">All Notifications</span>
       <span class="text-2xl font-semibold"> WeQuickPay <span v-if="route.path==='/AllUsers'">Users</span></span>
       <!-- <span class="text-2xl font-semibold" v-if="route.path === '/Transactions'"> WeQuickPay Users </span> -->
     </section>
