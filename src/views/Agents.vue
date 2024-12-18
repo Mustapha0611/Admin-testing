@@ -16,9 +16,9 @@
 </template>
 <script setup>
 import addAgentModal from '@/components/Agents/addAgentModal.vue';
-import sideBar from '@/components/Dashboard/sideBar.vue';
+import sideBar from '@/components/util/sideBar.vue';
 import { usepopUpControl } from '@/stores/popUpControl';
-import headerContent from '@/components/Dashboard/headerContent.vue';
+import headerContent from '@/components/util/headerContent.vue';
 import AllAgentsContainer from '@/components/Agents/AllAgentsContainer.vue';
 import { ref } from 'vue';
 

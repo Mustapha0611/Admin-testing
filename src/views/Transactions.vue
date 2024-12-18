@@ -8,12 +8,12 @@
         <div class="mb-4">
             <button class="bg-main px-6 text-sm ml-auto py-3 flex text-white gap-3 rounded-3xl"><img src="@/assets/back-arrow.png" alt="download" class="w-4 aspect-square"><span>Export as PDF</span></button>
         </div>
-        <AllUsersContainer />
+        <transactionContainer />
     </section>
     </div>
 </template>
 <script setup>
 import sideBar from '@/components/util/sideBar.vue';
 import headerContent from '@/components/util/headerContent.vue';
-import AllUsersContainer from '@/components/users/AllUsersContainer.vue';
+import transactionContainer from '@/components/transactions/transactionContainer.vue';
 </script>

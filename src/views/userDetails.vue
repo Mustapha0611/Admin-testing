@@ -25,8 +25,8 @@ import { ref } from 'vue'
 import { usepopUpControl } from "@/stores/popUpControl";
 import DetailMain from "@/components/users/userDetails/DetailMain.vue";
 import updateUser from "@/components/users/userDetails/updateUser.vue";
-import sideBar from "@/components/Dashboard/sideBar.vue";
-import headerContent from "@/components/Dashboard/headerContent.vue";
+import sideBar from "@/components/util/sideBar.vue";
+import headerContent from "@/components/util/headerContent.vue";
 import detailsHeader from "@/components/users/userDetails/detailsHeader.vue";
 const popUpControl = usepopUpControl()
 </script>

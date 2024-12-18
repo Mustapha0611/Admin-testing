@@ -65,8 +65,27 @@ const router = createRouter({
       path:'/Agents',
       name:'Agents',
       component:()=> import('../views/Agents.vue')
-    }
-
+    },
+    {
+      path:'/Transactions',
+      name:'Transactions',
+      component:()=> import('../views/Transactions.vue')
+    },
+    {
+      path:'/VerifyKYC',
+      name:'VerifyKYC',
+      component:()=> import('../views/Kyc.vue')
+  },
+  {
+    path:'/transaction-details',
+    name:'transaction-details',
+    component:()=> import('../views/transactionDetails.vue')
+},
+{
+  path:'/kyc-details',
+  name:'kyc-details',
+  component:()=> import('../views/kycDetails.vue')
+},
   ]
 })
 
