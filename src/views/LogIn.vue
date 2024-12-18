@@ -61,7 +61,7 @@
             <label for="Remember me"> Remember Password</label>
           </div>
           <div class="pt-10 pb-5 ">
-            <button class="md:min-w-96 min-w-full bg-main text-white py-3 rounded-3xl" @click.prevent="handleLogin">Login</button>
+            <button class="md:min-w-96 flex gap-2 items-center justify-center min-w-full bg-main text-white py-3 rounded-3xl" @click.prevent="handleLogin"><i class="pi pi-spin pi-spinner" v-if="isLoading"></i><span>Login</span></button>
           </div>
       </form>
       <section class="flex justify-center gap-5 text-main">
@@ -87,6 +87,7 @@ const toast = useToast()
 const showPassword = ref(false)
 const mail = ref('') 
 const password = ref('') 
+const isLoading = ref(false)
 const router = useRouter()
 
 const togglePassword = () =>{
@@ -107,6 +108,7 @@ const  handleLogin = async () =>{
       });
     }else{
       try {
+        isLoading.value = true
         const response = await axios.post('/auth/login', {email: mail.value, password: password.value}, { withCredentials: true });
         auth.setTokens({
         access: response.data.data.authTokens.access,
@@ -128,7 +130,7 @@ const  handleLogin = async () =>{
         summary: error.response.data.message,
         life: 3000,
       });
-      }
+      } finally { isLoading.value = false }
      
     }
 }

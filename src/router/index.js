@@ -86,6 +86,16 @@ const router = createRouter({
   name:'kyc-details',
   component:()=> import('../views/kycDetails.vue')
 },
+{
+  path:'/Notifications',
+  name:'Notifications',
+  component:()=> import('../views/notification.vue')
+},
+{
+  path:'/Settings',
+  name:'Settings',
+  component:()=> import('../views/Settings.vue')
+},
   ]
 })
 
