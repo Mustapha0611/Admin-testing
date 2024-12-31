@@ -96,6 +96,19 @@ const router = createRouter({
   name:'Settings',
   component:()=> import('../views/Settings.vue')
 },
+{
+  path:'/Add-New-Role',
+  name:'Add new role',
+  component:()=>import('../views/AddNewRole.vue')
+},{
+  path:'/Update-Role',
+  name:'Update',
+  component:()=>import('../views/upDateRole.vue')
+},{
+  path:'/Faqs',
+  name:'Faqs',
+  component:()=>import('../views/Faqs.vue')
+}
   ]
 })
 
