@@ -94,7 +94,11 @@ const items = ref([
     label:"Support",
     icon:"pi pi-map-marker",
     items:[
-
+    {
+        label: "FAQs",
+        icon: "pi pi-circle-fill",
+        route: "/Faqs",
+      }
     ]
   },
   {

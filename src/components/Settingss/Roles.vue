@@ -98,7 +98,7 @@
                 <li class="p-3 cursor-pointer font-semibold">Quick Actions</li>
                 <li
                   class="hover:bg-blue-100/70 px-2 py-2 cursor-pointer mt-1"
-                  @click="popUpControl.promptDelete"
+                  @click="updateRole"
                 >
                   Edit
                 </li>
@@ -157,11 +157,12 @@
             />
           </div> -->
   </div>
+ 
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
-//   import { useRouter } from "vue-router";
+  import { useRouter } from "vue-router";
 import confirmDialog from "@/components/util/confirmDialog.vue";
 import deleteicon from "@/assets/delete.svg";
 import deactivate from "@/assets/deactivate.svg";
@@ -170,7 +171,7 @@ const selectedAccounts = ref([]);
 
 // Access the store
 const popUpControl = usepopUpControl();
-
+const router = useRouter()
 const confirmBlock = () => {
   // Logic to block the account
   console.log("Account blocked");
@@ -181,7 +182,10 @@ const confirmDeactivate = () => {
   // Logic to deactivate the account
   console.log("Account deactivated");
 };
-
+const date = ref();
+const updateRole = ()=>{
+router.push('/Update-Role')
+}
 // Function to confirm deletion
 const confirmDelete = async () => {
   //   try {
